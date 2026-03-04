@@ -7,7 +7,6 @@ import {
 import { ResponseStatus } from '../utils/response.util'
 import { Response } from '../utils/response.util'
 import { Response as Res } from 'express'
-import { isArray } from 'class-validator'
 
 @Catch()
 export class ResponseFilter<T> implements ExceptionFilter {
@@ -18,19 +17,10 @@ export class ResponseFilter<T> implements ExceptionFilter {
     if (exception instanceof HttpException) {
       const errRes = exception.getResponse() as Response
 
-      if (isArray(errRes.message)) {
-        const errors = errRes.message.reduce<Record<string, string>>(
-          (acc, m) => {
-            const key = m.split(' ')[0]
-            acc[key] = m
-            return acc
-          },
-          {}
-        )
-
+      if (typeof errRes.message === 'object') {
         res.status(exception.getStatus()).json({
           status: ResponseStatus.VALIDATION_ERROR,
-          errors
+          errors: errRes.message
         })
         return
       }

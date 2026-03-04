@@ -3,21 +3,21 @@ import { IsNotEmpty, IsString } from 'class-validator'
 export class UserDto {}
 
 export class RegisterDto {
-  @IsString()
+  @IsString({ message: 'Имя должно быть строкой!' })
   @IsNotEmpty()
   name: string
 
-  @IsString()
+  @IsString({ message: 'Пароль долен быть строкой!' })
   @IsNotEmpty()
   password: string
 }
 
 export class LoginDto {
-  @IsString()
+  @IsString({ message: 'Имя должно быть строкой!' })
   @IsNotEmpty()
   name: string
 
-  @IsString()
+  @IsString({ message: 'Пароль долен быть строкой!' })
   @IsNotEmpty()
   password: string
 }
