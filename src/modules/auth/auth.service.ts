@@ -3,11 +3,11 @@ import {
   NotFoundException,
   UnauthorizedException
 } from '@nestjs/common'
-import { PrismaService } from '../prisma/prisma.service'
+import { PrismaService } from '../../prisma/prisma.service'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { Request, Response } from 'express'
-import { isDev } from '../utils/util.is-dev'
+import { isDev } from '../../utils/util.is-dev'
 import { Payload } from './interfaces/auth.payload'
 import ms, { StringValue } from 'ms'
 import { LoginDto, RegisterDto } from '../user/user.dto'
