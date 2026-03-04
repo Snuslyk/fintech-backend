@@ -2,7 +2,7 @@ import {
   ArgumentsHost,
   Catch,
   ExceptionFilter,
-  HttpException
+  HttpException, HttpStatus
 } from '@nestjs/common'
 import { ResponseStatus } from '../utils/response.util'
 import { Response } from '../utils/response.util'
@@ -32,5 +32,11 @@ export class ResponseFilter<T> implements ExceptionFilter {
       })
       return
     }
+
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      status: ResponseStatus.ERROR,
+      message: 'Internal server error',
+      code: HttpStatus.INTERNAL_SERVER_ERROR
+    })
   }
 }

@@ -14,7 +14,7 @@ export class UserService {
       }
     })
 
-    if (user) throw new ConflictException('User already exists!')
+    //if (user) throw new ConflictException('User already exists!')
 
     return this.prisma.user.create({
       data: {
