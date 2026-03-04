@@ -7,7 +7,7 @@ import { PrismaService } from '../../prisma/prisma.service'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { Request, Response } from 'express'
-import { isDev } from '../../utils/util.is-dev'
+import { isDev } from '../../utils/is-dev.util'
 import { Payload } from './interfaces/interface.payload'
 import ms, { StringValue } from 'ms'
 import { LoginDto, RegisterDto } from '../user/user.dto'
@@ -54,7 +54,6 @@ export class AuthService {
     let payload: Payload
     try {
       payload = this.jwtService.verify<Payload>(refresh)
-      console.log(payload)
     } catch {
       throw new UnauthorizedException('Invalid refresh token')
     }

@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { apiReference } from '@scalar/nestjs-api-reference'
 import { JwtGuard } from './guards/jwt.guard'
+import { ResponseInterceptor } from './interceptors/response.interceptor'
+import { ResponseFilter } from './filters/response.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -16,12 +18,12 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      whitelist: true,
-      transformOptions: {
-        enableImplicitConversion: true
-      }
+      whitelist: true
     })
   )
+
+  app.useGlobalFilters(new ResponseFilter())
+  app.useGlobalInterceptors(new ResponseInterceptor())
 
   const config = new DocumentBuilder()
     .setTitle('Fintech')
