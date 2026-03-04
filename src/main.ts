@@ -7,7 +7,7 @@ import { apiReference } from '@scalar/nestjs-api-reference'
 import { JwtGuard } from './guards/jwt.guard'
 import { ResponseInterceptor } from './interceptors/response.interceptor'
 import { ResponseFilter } from './filters/response.filter'
-import { validationExceptionConfig } from '../configs/validation-exception.config'
+import { ValidationExceptionConfig } from '../configs/validation-exception.config'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -20,7 +20,7 @@ async function bootstrap() {
     new ValidationPipe({
       transform: true,
       whitelist: true,
-      exceptionFactory: validationExceptionConfig
+      exceptionFactory: ValidationExceptionConfig
     })
   )
 

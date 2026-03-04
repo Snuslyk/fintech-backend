@@ -1,7 +1,7 @@
 import { ValidationError } from 'class-validator'
 import { HttpException, HttpStatus } from '@nestjs/common'
 
-export const validationExceptionConfig = (errors: ValidationError[]) => {
+export function ValidationExceptionConfig(errors: ValidationError[]) {
   const message = errors.reduce<Record<string, string | string[]>>((acc, error) => {
     const { property, constraints } = error
     if (constraints) {
