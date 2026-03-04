@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { Request, Response } from 'express'
 import { isDev } from '../../utils/util.is-dev'
-import { Payload } from './interfaces/auth.payload'
+import { Payload } from './interfaces/interface.payload'
 import ms, { StringValue } from 'ms'
 import { LoginDto, RegisterDto } from '../user/user.dto'
 import { UserService } from '../user/user.service'
@@ -99,5 +99,9 @@ export class AuthService {
     })
 
     return { refresh, access }
+  }
+
+  async validate(payload: Payload) {
+    return this.userService.findById(payload.id)
   }
 }

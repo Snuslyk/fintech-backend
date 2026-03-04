@@ -6,7 +6,7 @@ export function JwtConfig(configService: ConfigService): JwtModuleOptions {
     secret: configService.getOrThrow('JWT_SECRET'),
     verifyOptions: {
       algorithms: ['HS256'],
-      ignoreExpiration: true
+      ignoreExpiration: false
     },
     signOptions: {
       algorithm: 'HS256'
