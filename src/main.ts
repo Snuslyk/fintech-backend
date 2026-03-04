@@ -36,7 +36,7 @@ async function bootstrap() {
     apiReference({
       content: document,
       theme: 'default'
-    }),
+    })
   )
 
   const reflector = new Reflector()
