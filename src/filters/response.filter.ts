@@ -2,7 +2,8 @@ import {
   ArgumentsHost,
   Catch,
   ExceptionFilter,
-  HttpException, HttpStatus
+  HttpException, HttpStatus,
+  Logger
 } from '@nestjs/common'
 import { ResponseStatus } from '../utils/response.util'
 import { Response } from '../utils/response.util'
@@ -10,9 +11,13 @@ import { Response as Res } from 'express'
 
 @Catch()
 export class ResponseFilter<T> implements ExceptionFilter {
+  private readonly logger = new Logger(ResponseFilter.name)
+
   catch(exception: T, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const res = ctx.getResponse<Res>()
+
+    this.logger.error(exception, ctx)
 
     if (exception instanceof HttpException) {
       const errRes = exception.getResponse() as Response
