@@ -23,7 +23,7 @@ export class UserController {
   @ApiUnauthorizedResponse({
     description: 'Unauthorized'
   })
-  @Get()
+  @Get('me')
   getSelf(@Authorized() user: User) {
     return user
   }
