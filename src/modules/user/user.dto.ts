@@ -1,24 +1,42 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator'
+import { IsNotEmpty, IsString, MinLength } from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger'
 
 export class UserDto {}
 
 export class RegisterDto {
-  @IsString({ message: 'Имя должно быть строкой!' })
-  @IsEmail(undefined, { message: 'Имя должно быть в формате Email!' })
+  @ApiProperty({
+    description: 'User name (used as login identifier)',
+    example: 'user',
+  })
+  @IsString()
   @IsNotEmpty()
   name: string
 
-  @IsString({ message: 'Пароль долен быть строкой!' })
+  @ApiProperty({
+    description: 'User password',
+    example: 'strongPassword123',
+    minLength: 6,
+  })
+  @MinLength(6)
+  @IsString()
   @IsNotEmpty()
   password: string
 }
 
 export class LoginDto {
-  @IsString({ message: 'Имя должно быть строкой!' })
+  @ApiProperty({
+    description: 'User name (login)',
+    example: 'user',
+  })
+  @IsString()
   @IsNotEmpty()
   name: string
 
-  @IsString({ message: 'Пароль долен быть строкой!' })
+  @ApiProperty({
+    description: 'User password',
+    example: 'strongPassword123',
+  })
+  @IsString()
   @IsNotEmpty()
   password: string
 }

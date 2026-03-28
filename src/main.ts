@@ -35,6 +35,10 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config)
 
+  app.getHttpAdapter().get('/docs-json', (req, res) => {
+    res.json(document)
+  })
+
   app.use(
     '/docs',
     apiReference({
